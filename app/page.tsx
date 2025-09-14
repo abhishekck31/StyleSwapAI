@@ -228,10 +228,7 @@ export default function StyleSwapPro() {
           <span className="text-gray-500 dark:text-gray-400 text-sm">No hidden fees. Cancel anytime.</span>
         </div>
       </div>
-      <div className="absolute left-1/2 bottom-0 -translate-x-1/2 translate-y-1/2 bg-white dark:bg-gray-950 rounded-full shadow-lg px-6 py-2 flex items-center gap-2 border border-gray-200 dark:border-gray-800">
-        
-        <a href="#" className="ml-4 px-4 py-1 rounded-full bg-green-100 text-green-700 font-bold hover:bg-green-200 transition">Register →</a>
-      </div>
+    
     </section>
   );
 

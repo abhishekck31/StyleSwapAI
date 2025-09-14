@@ -1,40 +1,22 @@
-import type { NextApiRequest, NextApiResponse } from 'next';
+
+import { NextRequest } from 'next/server';
 import axios from 'axios';
 import FormData from 'form-data';
 
-export const config = {
-  api: {
-    bodyParser: false,
-  },
-};
-
-
-// Helper to get API key from env
-function getApiKey() {
-  return process.env.NANO_BANANA_API_KEY || '';
-}
-
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Method not allowed' });
-  }
-
+export async function POST(request: NextRequest) {
   try {
     // Read image from request
-    const chunks: Buffer[] = [];
-    for await (const chunk of req) {
-      chunks.push(Buffer.from(chunk));
-    }
-    const imageBuffer = Buffer.concat(chunks);
+    const imageBuffer = Buffer.from(await request.arrayBuffer());
 
     // Get API key from env
-    const apiKey = getApiKey();
+    const apiKey = process.env.NANO_BANANA_API_KEY || '';
     if (!apiKey) {
-      return res.status(500).json({ error: 'API key not set in environment.' });
+      return new Response(JSON.stringify({ error: 'API key not set in environment.' }), { status: 500 });
     }
 
     // Get prompt from query
-    const prompt = req.query.prompt || 'Add new elements and designs to this room.';
+    const { searchParams } = new URL(request.url);
+    const prompt = searchParams.get('prompt') || 'Add new elements and designs to this room.';
 
     // Prepare form data for Nano Banana API (Node.js compatible)
     const formData = new FormData();
@@ -42,7 +24,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       filename: 'room.png',
       contentType: 'image/png',
     });
-    formData.append('prompt', prompt as string);
+    formData.append('prompt', prompt);
 
     // Send request to Nano Banana API using axios
     let nanoResponse;
@@ -60,18 +42,20 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       );
     } catch (apiError: any) {
       console.error('Nano Banana API error:', apiError?.response?.data || apiError.message);
-      return res.status(500).json({ error: 'Nano Banana API error', details: apiError?.response?.data || apiError.message });
+      return new Response(JSON.stringify({ error: 'Nano Banana API error', details: apiError?.response?.data || apiError.message }), { status: 500 });
     }
 
     if (nanoResponse.status !== 200) {
       console.error('Nano Banana API non-200 response:', nanoResponse.status, nanoResponse.data);
-      return res.status(500).json({ error: 'Failed to edit image.', details: nanoResponse.data });
+      return new Response(JSON.stringify({ error: 'Failed to edit image.', details: nanoResponse.data }), { status: 500 });
     }
 
     console.log('Nano Banana API success, returning image.');
-    res.setHeader('Content-Type', 'image/png');
-    res.status(200).send(Buffer.from(new Uint8Array(nanoResponse.data as ArrayBuffer)));
+    return new Response(Buffer.from(new Uint8Array(nanoResponse.data as ArrayBuffer)), {
+      status: 200,
+      headers: { 'Content-Type': 'image/png' },
+    });
   } catch (error: any) {
-    res.status(500).json({ error: error.message || 'Failed to process image.' });
+    return new Response(JSON.stringify({ error: error.message || 'Failed to process image.' }), { status: 500 });
   }
 }

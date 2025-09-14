@@ -20,6 +20,7 @@ export default async function handler(req, res) {
       body: JSON.stringify({ prompt, image: imageData }),
     });
     const result = await response.json();
+    console.log('Gemini API response:', JSON.stringify(result, null, 2));
     if (!response.ok) {
       throw new Error(result.error?.message || 'Gemini API error');
     }

@@ -199,18 +199,40 @@ export default function StyleSwapPro() {
       <p className="text-gray-300 mt-6">(Coming soon: AI-powered editing features for your room images!)</p>
     </section>
   );
-  // Hero Section
+  // Premium Hero Section inspired by Odoo
   const Hero = () => (
-    <section className={`w-full py-16 px-4 md:px-12 lg:px-32 flex flex-col items-center justify-center text-center relative ${theme === 'dark' ? '' : 'bg-gradient-to-b from-white to-gray-100'}`}>
-      <div className="absolute inset-0 pointer-events-none z-0">
-        <div className={`absolute top-0 left-1/2 transform -translate-x-1/2 w-2/3 h-32 blur-2xl opacity-60 ${theme === 'dark' ? 'bg-gradient-to-r from-white/10 via-gray-400/10 to-white/10' : 'bg-gradient-to-r from-gray-200 via-white to-gray-200'}`} />
-        <div className={`absolute bottom-0 left-1/2 transform -translate-x-1/2 w-2/3 h-32 blur-2xl opacity-60 ${theme === 'dark' ? 'bg-gradient-to-r from-white/10 via-gray-400/10 to-white/10' : 'bg-gradient-to-r from-gray-200 via-white to-gray-200'}`} />
+    <section className="relative flex flex-col items-center justify-center min-h-[70vh] bg-white dark:bg-gray-950 px-4 pt-24 pb-16">
+      <div className="max-w-3xl w-full text-center">
+        <h1 className="text-4xl md:text-6xl font-extrabold leading-tight mb-6 text-gray-900 dark:text-white">
+          All your design dreams on
+          <span className="relative inline-block mx-2">
+            <span className="bg-yellow-300 rounded-lg px-2 py-1 text-black font-extrabold text-4xl md:text-6xl" style={{ position: 'relative', zIndex: 1 }}>
+              one platform
+            </span>
+            <span className="absolute left-0 top-1/2 w-full h-2 bg-yellow-300 rounded-lg -z-10" style={{ opacity: 0.5 }}></span>
+          </span>
+          .
+        </h1>
+        <h2 className="text-2xl md:text-3xl font-semibold mb-8 text-gray-700 dark:text-gray-200">
+          Simple, efficient, yet <span className="relative inline-block">
+            <span className="bg-blue-200 rounded px-2 py-1 text-blue-900 font-semibold">affordable!</span>
+            <span className="absolute left-0 bottom-0 w-full h-1 bg-blue-300 rounded-lg -z-10" style={{ opacity: 0.5 }}></span>
+          </span>
+        </h2>
+        <div className="flex flex-col md:flex-row gap-4 justify-center mb-8">
+          <button className="px-8 py-4 rounded-xl bg-purple-700 text-white font-bold text-lg shadow-lg hover:bg-purple-800 transition">Start now - It's free</button>
+          <button className="px-8 py-4 rounded-xl bg-gray-100 dark:bg-gray-800 text-purple-700 dark:text-purple-300 font-bold text-lg shadow-lg border hover:bg-gray-200 dark:hover:bg-gray-700 transition">Meet an advisor</button>
+        </div>
+        <div className="flex flex-col items-center mt-4">
+          <span className="text-purple-700 dark:text-purple-300 text-xl font-semibold mb-2">580.00 Rs / month for ALL features</span>
+          <span className="text-gray-500 dark:text-gray-400 text-sm">No hidden fees. Cancel anytime.</span>
+        </div>
       </div>
-      <h1 className={`text-4xl md:text-6xl font-extrabold mb-6 z-10 ${theme === 'dark' ? 'text-white drop-shadow-lg' : 'text-gray-900'}`}>StyleSwap AI</h1>
-      <p className={`text-lg md:text-2xl mb-8 z-10 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>Transform your room with AI-powered interior design. Upload, describe, and watch the magic happen.</p>
-      <div className="flex flex-col md:flex-row gap-4 justify-center z-10">
-        <button className={`px-8 py-4 rounded-2xl font-bold text-lg shadow-lg hover:scale-105 transition ${theme === 'dark' ? 'bg-gradient-to-r from-white/80 to-gray-300 text-black' : 'bg-gradient-to-r from-blue-500 to-purple-500 text-white'}`}>Get Started</button>
-        <button className={`px-8 py-4 rounded-2xl font-bold text-lg shadow-lg hover:scale-105 transition border ${theme === 'dark' ? 'bg-gradient-to-r from-gray-800 to-gray-700 text-white border-white/20' : 'bg-white text-gray-900 border-gray-300'}`}>Live Demo</button>
+      <div className="absolute left-1/2 bottom-0 -translate-x-1/2 translate-y-1/2 bg-white dark:bg-gray-950 rounded-full shadow-lg px-6 py-2 flex items-center gap-2 border border-gray-200 dark:border-gray-800">
+        <span className="text-2xl">🇮🇳</span>
+        <span className="font-semibold text-gray-700 dark:text-gray-200">StyleSwapAI x Hackathon 2025</span>
+        <span className="text-gray-500 dark:text-gray-400">Sep 20, 2025</span>
+        <a href="#" className="ml-4 px-4 py-1 rounded-full bg-green-100 text-green-700 font-bold hover:bg-green-200 transition">Register →</a>
       </div>
     </section>
   );

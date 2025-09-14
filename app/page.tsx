@@ -239,17 +239,22 @@ export default function StyleSwapPro() {
 
   // Onboarding Steps
   const Onboarding = () => (
-    <section className={`w-full py-10 px-4 md:px-12 lg:px-32 flex flex-col items-center text-center ${theme === 'dark' ? '' : 'bg-white'}`}>
-      <div className="flex flex-col md:flex-row gap-8 justify-center">
+    <section className={`w-full py-16 px-4 md:px-12 lg:px-32 flex flex-col items-center text-center bg-gray-50 dark:bg-gray-900`}>
+      <h2 className="text-3xl md:text-4xl font-extrabold mb-10 text-gray-900 dark:text-white">All Features Available</h2>
+  <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-6 w-full max-w-6xl">
         {[
-          { icon: '🖼️', title: 'Upload Room Photo', desc: 'Start by uploading a clear photo of your room.' },
-          { icon: '💡', title: 'Describe Your Style', desc: 'Tell us your dream style or pick from AI suggestions.' },
-          { icon: '✨', title: 'See the Transformation', desc: 'Watch your room get a stunning AI makeover.' },
-        ].map((step, idx) => (
-          <div key={idx} className={`rounded-2xl shadow-lg p-8 flex flex-col items-center w-72 border ${theme === 'dark' ? 'bg-gradient-to-br from-gray-900 to-gray-800 border-white/10' : 'bg-gradient-to-br from-gray-100 to-white border-gray-300'}`}>
-            <div className="text-4xl mb-4">{step.icon}</div>
-            <h3 className={`text-xl font-bold mb-2 ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>{step.title}</h3>
-            <p className={`${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>{step.desc}</p>
+          { icon: '�', label: 'AI Room Designer' },
+          { icon: '🎨', label: 'Color Palette Extraction' },
+          { icon: '🖼️', label: 'Image Comparison' },
+          { icon: '📝', label: 'Prompt-based Styling' },
+          { icon: '⚡', label: 'Fast Image Generation' },
+          { icon: '📤', label: 'Export HD Images' },
+          { icon: '🛠️', label: 'Advanced Editing' },
+          { icon: '🔍', label: 'Style Suggestions' },
+        ].map((feature, idx) => (
+          <div key={idx} className="flex flex-col items-center justify-center bg-white dark:bg-gray-800 rounded-xl shadow-md p-3 border border-gray-200 dark:border-gray-700 min-w-[80px] min-h-[80px] max-w-[110px] max-h-[110px]">
+            <div className="text-2xl mb-2">{feature.icon}</div>
+            <div className="font-semibold text-xs text-gray-900 dark:text-white mb-1 text-center">{feature.label}</div>
           </div>
         ))}
       </div>
